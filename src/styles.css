@@ -4,6 +4,69 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-cream: var(--cream);
+  --color-whatsapp: var(--whatsapp);
+  --shadow-soft: 0 18px 40px -22px oklch(0 0 0 / 0.65);
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  --animate-hero-zoom: hero-zoom 22s ease-out forwards;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@utility bg-hero-veil {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--navy-deep) 92%, transparent) 0%,
+    color-mix(in oklab, var(--navy-deep) 72%, transparent) 32%,
+    color-mix(in oklab, var(--navy-deep) 32%, transparent) 62%,
+    transparent 90%
+  );
+}
+
+@utility bg-hero-base {
+  background-image: linear-gradient(
+    to top,
+    color-mix(in oklab, var(--navy-deep) 78%, transparent) 0%,
+    transparent 42%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
 /*
  * Design system definition.
  *
