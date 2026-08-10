@@ -27,7 +27,7 @@ export function Navbar() {
           <img
             src={logoAsset.url}
             alt="LG Persianas"
-            className={`w-auto shrink-0 transition-all duration-500 ${scrolled ? "h-11" : "h-14"} lg:${scrolled ? "h-12" : "h-16"}`}
+            className={`w-auto shrink-0 transition-all duration-500 ${scrolled ? "h-11 lg:h-12" : "h-14 lg:h-16"}`}
             width={776}
             height={545}
           />
