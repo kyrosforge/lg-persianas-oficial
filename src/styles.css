@@ -126,6 +126,12 @@
 
 :root {
   --radius: 0.625rem;
+  --navy: oklch(0.24 0.045 258);
+  --navy-deep: oklch(0.17 0.038 258);
+  --gold: oklch(0.79 0.115 82);
+  --gold-soft: oklch(0.88 0.07 85);
+  --cream: oklch(0.975 0.008 85);
+  --whatsapp: oklch(0.52 0.13 155);
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
