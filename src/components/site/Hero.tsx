@@ -34,7 +34,7 @@ function TrustBar() {
                     ★★★★★
                   </p>
                 )}
-                <p className="truncate text-xs font-light text-cream/70">{item.label}</p>
+                <p className="text-xs font-light leading-snug text-cream/70">{item.label}</p>
               </div>
             </li>
           );
