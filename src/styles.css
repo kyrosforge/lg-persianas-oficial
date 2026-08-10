@@ -40,12 +40,22 @@
 
 @utility bg-hero-veil {
   background-image: linear-gradient(
-    to right,
-    color-mix(in oklab, var(--navy-deep) 92%, transparent) 0%,
-    color-mix(in oklab, var(--navy-deep) 72%, transparent) 32%,
-    color-mix(in oklab, var(--navy-deep) 32%, transparent) 62%,
-    transparent 90%
+    to top,
+    color-mix(in oklab, var(--navy-deep) 94%, transparent) 0%,
+    color-mix(in oklab, var(--navy-deep) 80%, transparent) 45%,
+    color-mix(in oklab, var(--navy-deep) 55%, transparent) 80%,
+    color-mix(in oklab, var(--navy-deep) 40%, transparent) 100%
   );
+
+  @media (width >= 64rem) {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--navy-deep) 92%, transparent) 0%,
+      color-mix(in oklab, var(--navy-deep) 72%, transparent) 32%,
+      color-mix(in oklab, var(--navy-deep) 32%, transparent) 62%,
+      transparent 90%
+    );
+  }
 }
 
 @utility bg-hero-base {
