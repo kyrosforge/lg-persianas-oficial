@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
-import logoImg from "@/assets/logo-lg.png";
+import logoImg from "@/assets/logo-lg-light.png";
 import { WHATSAPP_URL, NAV_LINKS } from "./hero-data";
 
 export function Navbar() {
