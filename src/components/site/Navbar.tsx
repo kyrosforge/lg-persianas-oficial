@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, X, MessageCircle } from "lucide-react";
-import logoAsset from "@/assets/logo-lg.png.asset.json";
+import logoImg from "@/assets/logo-lg.png";
 import { WHATSAPP_URL, NAV_LINKS } from "./hero-data";
 
 export function Navbar() {
@@ -25,7 +25,7 @@ export function Navbar() {
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 lg:flex lg:justify-between lg:px-10">
         <a href="#hero" className="flex min-w-0 items-center" aria-label="LG Persianas — início">
           <img
-            src={logoAsset.url}
+            src={logoImg}
             alt="LG Persianas"
             className={`w-auto shrink-0 transition-all duration-500 ${scrolled ? "h-11 lg:h-12" : "h-14 lg:h-16"}`}
             width={776}

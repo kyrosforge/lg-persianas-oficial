@@ -1,5 +1,5 @@
 import { MessageCircle, Phone, MapPin, Star, Award, Shield, Users } from "lucide-react";
-import heroAsset from "@/assets/hero-img.png.asset.json";
+import heroImg from "@/assets/hero-img.png";
 import {
   WHATSAPP_URL,
   PHONE_DISPLAY,
@@ -48,7 +48,7 @@ export function Hero() {
   return (
     <section id="hero" className="relative min-h-[100svh] w-full overflow-hidden bg-navy">
       <img
-        src={heroAsset.url}
+        src={heroImg}
         alt="Sala de estar contemporânea com persianas rolô sob medida e vista panorâmica de Brasília"
         fetchPriority="high"
         decoding="async"
