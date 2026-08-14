@@ -6,12 +6,13 @@ import { AboutSection } from "@/components/site/AboutSection";
 import { ProductsSection, type ProductItem } from "@/components/site/ProductsSection";
 import { ServicesSection } from "@/components/site/ServicesSection";
 import { ProcessSection } from "@/components/site/ProcessSection";
-import { DifferentialsSection } from "@/components/site/DifferentialsSection";
 import { PortfolioSection } from "@/components/site/PortfolioSection";
 import { TestimonialsSection } from "@/components/site/TestimonialsSection";
 import { LocationSection } from "@/components/site/LocationSection";
+import { FinalCtaSection } from "@/components/site/FinalCtaSection";
 import { Footer } from "@/components/site/Footer";
 import { ProductModal } from "@/components/site/ProductModal";
+import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,32 +47,35 @@ function Index() {
       {/* 1. Hero Section */}
       <Hero />
 
-      {/* 2. Quem Somos Section (Image 1 Mockup) */}
+      {/* 2. Quem Somos + Diferenciais Section */}
       <AboutSection />
 
-      {/* 3. Nossos Produtos Section (Image 2 Mockup) */}
+      {/* 3. Nossos Produtos Section */}
       <ProductsSection onSelectProduct={(prod) => setSelectedProduct(prod)} />
 
-      {/* 4. Nossos Serviços Section (Image 3 Mockup) */}
+      {/* 4. Nossos Serviços Section */}
       <ServicesSection />
 
-      {/* 5. Como Funciona Section (Image 4 Mockup) */}
+      {/* 5. Como Funciona Section */}
       <ProcessSection />
 
-      {/* 6. Diferenciais Section (Image 5 Mockup) */}
-      <DifferentialsSection />
-
-      {/* 7. Portfólio de Projetos no DF */}
+      {/* 6. Portfólio de Projetos no DF */}
       <PortfolioSection />
 
-      {/* 8. Depoimentos dos Clientes */}
+      {/* 7. Depoimentos dos Clientes */}
       <TestimonialsSection />
 
-      {/* 9. Cobertura no DF & FAQ */}
+      {/* 8. Cobertura no DF & FAQ */}
       <LocationSection />
+
+      {/* 9. Seção de CTA Final Premium */}
+      <FinalCtaSection />
 
       {/* 10. Rodapé Completo */}
       <Footer />
+
+      {/* Persistent Floating WhatsApp Button */}
+      <WhatsAppFloat />
 
       {/* Interactive Product Details Modal */}
       <ProductModal

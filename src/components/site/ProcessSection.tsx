@@ -5,14 +5,8 @@ import {
   Scissors,
   Truck,
   Sparkles,
-  Shield,
-  Award,
-  MapPin,
   MessageCircle,
-  CheckCircle,
 } from "lucide-react";
-import heroImg from "@/assets/hero-img.png";
-import instalacaoImg from "@/assets/services/instalacao.png";
 import { WHATSAPP_URL } from "./hero-data";
 
 const STEPS = [
@@ -20,190 +14,128 @@ const STEPS = [
     number: "01",
     icon: MessageSquare,
     title: "Primeiro contato",
-    desc: "Você fala com a nossa equipe pelo WhatsApp ou formulário. Entendemos suas necessidades e estilo de ambiente.",
-    image: heroImg,
+    desc: "Conversamos no WhatsApp. Entendemos a necessidade do seu ambiente.",
   },
   {
     number: "02",
     icon: Ruler,
-    title: "Visita técnica",
-    desc: "Nossos técnicos vão até o seu endereço no DF. Medimos cada janela com laser de precisão e apresentamos o catálogo.",
-    image: instalacaoImg,
+    title: "Visita técnica grátis",
+    desc: "Vamos até seu endereço no DF. Medimos com laser e levamos o catálogo.",
   },
   {
     number: "03",
     icon: FileCheck,
     title: "Proposta personalizada",
-    desc: "Enviamos o orçamento transparente com os melhores modelos, tecidos, acionamentos e condições de pagamento.",
-    image: heroImg,
+    desc: "Enviamos orçamento claro com os melhores tecidos e opções.",
   },
   {
     number: "04",
     icon: Scissors,
     title: "Fabricação sob medida",
-    desc: "Seu pedido entra em produção milimétrica com materiais de alta durabilidade e rígido controle de qualidade.",
-    image: instalacaoImg,
+    desc: "Produção milimétrica com materiais de alta durabilidade.",
   },
   {
     number: "05",
     icon: Truck,
     title: "Entrega e instalação",
-    desc: "Nossa equipe própria instala suas persianas com agilidade, limpeza total e perfeito alinhamento técnico.",
-    image: instalacaoImg,
+    desc: "Instalação rápida e limpa feita por nossa equipe própria.",
   },
   {
     number: "06",
     icon: Sparkles,
     title: "Ambiente pronto",
-    desc: "Você desfruta de um ambiente mais bonito, térmico e elegante — com suporte contínuo e garantia de até 2 anos.",
-    image: heroImg,
-  },
-];
-
-const REASSURANCE = [
-  {
-    icon: MessageSquare,
-    title: "Atendimento especializado",
-    desc: "Consultoria do primeiro contato ao pós-venda.",
-  },
-  {
-    icon: Award,
-    title: "Materiais de alta qualidade",
-    desc: "Trabalhamos apenas com fornecedores premium.",
-  },
-  {
-    icon: Shield,
-    title: "Garantia de até 2 anos",
-    desc: "Segurança e tranquilidade em produtos e serviços.",
-  },
-  {
-    icon: MapPin,
-    title: "Todo o Distrito Federal",
-    desc: "Atendemos Brasília e todas as regiões do DF.",
+    desc: "Seu espaço renovado com elegância e garantia de até 2 anos.",
   },
 ];
 
 export function ProcessSection() {
   return (
-    <section id="como-funciona" className="relative bg-navy py-20 lg:py-28 text-cream overflow-hidden">
-      {/* Glow shapes */}
+    <section id="como-funciona" className="relative bg-navy py-16 lg:py-24 text-cream overflow-hidden">
+      {/* Glow ambient background */}
       <div className="absolute top-0 right-1/4 w-[450px] h-[450px] bg-gold/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-10">
         
-        {/* Header */}
-        <div className="max-w-3xl space-y-4">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] text-gold uppercase bg-gold/10 px-3.5 py-1.5 rounded-full border border-gold/20">
-            <Sparkles className="w-3.5 h-3.5" /> COMO FUNCIONA
+        {/* Section Header */}
+        <div className="max-w-3xl space-y-4 text-center mx-auto">
+          <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-[0.2em] text-gold uppercase bg-gold/15 px-4 py-1.5 rounded-full border border-gold/30">
+            <Sparkles className="w-4 h-4 text-gold" /> PROCESSO SIMPLES E TRANSPARENTE
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.12] text-cream">
-            Do primeiro contato ao <span className="text-gold italic">ambiente perfeito.</span>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.14] text-cream">
+            Como funciona seu atendimento em <span className="text-gold italic font-serif">6 passos simples.</span>
           </h2>
-          <p className="text-base sm:text-lg font-light text-cream/80 leading-relaxed">
-            Um processo simples, transparente e eficiente para garantir a melhor experiência em cada etapa do seu projeto de persianas sob medida.
+          <p className="text-base sm:text-lg font-normal text-cream/90 leading-relaxed">
+            Do orçamento inicial à entrega final, cuidamos de tudo com agilidade e transparência.
           </p>
         </div>
 
-        {/* Step Numbers Top Banner */}
-        <div className="mt-12 hidden lg:flex items-center justify-between p-6 rounded-2xl bg-navy/80 border border-gold/20 backdrop-blur-md">
-          {STEPS.map((step, idx) => (
-            <div key={step.number} className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <span className="w-9 h-9 rounded-full bg-gold text-navy font-bold text-sm flex items-center justify-center shadow-md">
-                  {step.number}
-                </span>
-                <span className="text-xs font-medium text-cream">{step.title}</span>
-              </div>
-              {idx < STEPS.length - 1 && (
-                <div className="w-12 h-0.5 bg-gradient-to-r from-gold/60 to-gold/10" />
-              )}
-            </div>
-          ))}
-        </div>
+        {/* DESKTOP TIMELINE (Horizontal) */}
+        <div className="hidden lg:block mt-14">
+          <div className="relative grid grid-cols-6 gap-4">
+            {/* Horizontal Connecting Line */}
+            <div className="absolute top-7 left-12 right-12 h-1 bg-gradient-to-r from-gold/80 via-gold/40 to-gold/80 -z-0" />
 
-        {/* 6 Step Cards Grid */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {STEPS.map((step) => {
-            const Icon = step.icon;
-            return (
-              <div
-                key={step.number}
-                className="group relative rounded-2xl bg-navy/90 border border-cream/15 p-6 overflow-hidden flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:border-gold/60 hover:shadow-xl"
-              >
-                {/* Header with Step badge */}
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="w-11 h-11 rounded-xl bg-gold/15 text-gold flex items-center justify-center border border-gold/30 group-hover:bg-gold group-hover:text-navy transition-colors">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className="font-serif text-3xl font-bold text-gold/30 group-hover:text-gold/80 transition-colors">
-                      {step.number}
-                    </span>
+            {STEPS.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.number} className="relative z-10 flex flex-col items-center text-center space-y-3 group">
+                  {/* Circle Badge */}
+                  <div className="w-14 h-14 rounded-full bg-navy border-2 border-gold text-gold font-serif font-bold text-lg flex items-center justify-center shadow-lg group-hover:bg-gold group-hover:text-navy transition-colors duration-300">
+                    <Icon className="w-6 h-6" />
                   </div>
 
-                  <h3 className="font-serif text-xl font-semibold text-cream group-hover:text-gold transition-colors">
+                  <span className="text-xs font-bold text-gold uppercase tracking-wider">Passo {step.number}</span>
+
+                  <h3 className="font-serif text-lg font-bold text-cream group-hover:text-gold transition-colors leading-snug">
                     {step.title}
                   </h3>
 
-                  <p className="text-xs font-light text-cream/75 leading-relaxed">
+                  <p className="text-xs font-normal text-cream/80 leading-relaxed max-w-[190px]">
                     {step.desc}
                   </p>
                 </div>
-
-                <div className="mt-6 pt-4 border-t border-cream/10 flex items-center justify-between text-xs text-gold/90 font-medium">
-                  <span className="flex items-center gap-1.5">
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-400" /> Etapa Acompanhada
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Reassurance Grid */}
-        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {REASSURANCE.map((item) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.title}
-                className="p-5 rounded-xl bg-navy/60 border border-cream/10 flex items-start gap-4 hover:border-gold/30 transition-colors"
-              >
-                <div className="w-10 h-10 rounded-lg bg-gold/15 text-gold flex items-center justify-center shrink-0 border border-gold/30">
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="font-serif text-sm font-semibold text-cream">{item.title}</h4>
-                  <p className="text-xs font-light text-cream/70 mt-0.5 leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Bottom CTA Banner */}
-        <div className="mt-16 rounded-2xl bg-gradient-to-r from-navy via-navy/90 to-navy p-6 sm:p-10 border border-gold/40 shadow-2xl text-cream">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="space-y-2 text-center md:text-left">
-              <span className="text-xs font-semibold uppercase tracking-widest text-gold">Agende em menos de 1 minuto</span>
-              <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-cream">
-                Vamos começar o projeto do seu ambiente?
-              </h3>
-              <p className="text-xs sm:text-sm text-cream/80 font-light">
-                Solicite uma visita técnica gratuita sem compromisso em qualquer região de Brasília/DF.
-              </p>
-            </div>
-
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 rounded-xl bg-whatsapp px-8 py-4 text-base font-medium text-cream shadow-xl hover:scale-105 transition-transform shrink-0"
-            >
-              <MessageCircle className="w-5 h-5" />
-              Pedir orçamento no WhatsApp
-            </a>
+              );
+            })}
           </div>
+        </div>
+
+        {/* MOBILE / TABLET TIMELINE (Vertical) */}
+        <div className="lg:hidden mt-10 relative">
+          {/* Vertical Connecting Line */}
+          <div className="absolute top-6 bottom-6 left-6 w-1 bg-gradient-to-b from-gold via-gold/50 to-gold -z-0" />
+
+          <div className="space-y-6">
+            {STEPS.map((step) => {
+              const Icon = step.icon;
+              return (
+                <div key={step.number} className="relative z-10 flex items-start gap-4 p-4 rounded-xl bg-navy/90 border border-cream/15">
+                  <div className="w-12 h-12 rounded-full bg-gold text-navy font-bold text-base flex items-center justify-center shrink-0 shadow-md">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs font-bold text-gold uppercase">Passo {step.number}</span>
+                    </div>
+                    <h3 className="font-serif text-lg font-bold text-cream mt-0.5">{step.title}</h3>
+                    <p className="text-xs sm:text-sm font-normal text-cream/90 mt-1 leading-relaxed">{step.desc}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom Call to Action */}
+        <div className="mt-12 text-center">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[50px] items-center justify-center gap-3 rounded-full bg-whatsapp px-8 py-3.5 text-base sm:text-lg font-semibold text-cream shadow-xl hover:scale-105 transition-transform"
+          >
+            <MessageCircle className="w-6 h-6" />
+            Solicitar Orçamento Gratuito no WhatsApp
+          </a>
         </div>
 
       </div>

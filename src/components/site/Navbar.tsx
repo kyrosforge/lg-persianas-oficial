@@ -16,80 +16,90 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 animate-fade-in transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ${
         scrolled
-          ? "bg-navy/85 shadow-[0_1px_0_0_color-mix(in_oklab,var(--gold)_18%,transparent)] backdrop-blur-xl"
-          : "bg-transparent"
+          ? "bg-navy/95 shadow-lg shadow-black/20 backdrop-blur-xl border-b border-gold/20"
+          : "bg-gradient-to-b from-navy/90 via-navy/50 to-transparent"
       }`}
     >
       <div className="mx-auto grid max-w-[1400px] grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-5 py-4 lg:flex lg:justify-between lg:px-10">
-        <a href="#hero" className="flex min-w-0 items-center" aria-label="LG Persianas — início">
+        
+        {/* Logo Link */}
+        <a href="#hero" className="flex min-w-0 items-center" aria-label="LG Persianas — página inicial">
           <img
             src={logoImg}
-            alt="LG Persianas"
+            alt="LG Persianas Logo"
             className={`w-auto shrink-0 transition-all duration-500 ${scrolled ? "h-11 lg:h-12" : "h-14 lg:h-16"}`}
             width={776}
             height={545}
           />
         </a>
 
-        <nav aria-label="Navegação principal" className="hidden lg:flex lg:items-center lg:gap-8">
+        {/* Desktop Navigation Links */}
+        <nav aria-label="Navegação principal" className="hidden lg:flex lg:items-center lg:gap-7">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="story-link text-sm font-light tracking-wide text-cream/85 transition-colors hover:text-gold"
+              className="text-base font-medium tracking-wide text-cream transition-colors hover:text-gold focus-visible:outline-2 focus-visible:outline-gold"
             >
               {link.label}
             </a>
           ))}
         </nav>
 
+        {/* Header CTA */}
         <div className="hidden lg:block">
           <a
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-3 text-sm font-medium text-cream shadow-soft transition-transform duration-300 hover:scale-[1.02] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="inline-flex min-h-[48px] items-center gap-2.5 rounded-full bg-whatsapp px-6 py-3 text-base font-bold text-cream shadow-md transition-transform duration-300 hover:scale-[1.03] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
           >
-            <MessageCircle className="h-4 w-4" aria-hidden="true" />
+            <MessageCircle className="h-5 w-5" aria-hidden="true" />
             Orçamento no WhatsApp
           </a>
         </div>
 
+        {/* Mobile Hamburger Toggle Button */}
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
+          aria-label={open ? "Fechar menu de navegação" : "Abrir menu de navegação"}
           aria-expanded={open}
-          className="justify-self-end rounded-full border border-cream/25 p-2.5 text-cream transition-colors hover:border-gold hover:text-gold lg:hidden"
+          className="justify-self-end flex min-h-[48px] min-w-[48px] items-center justify-center rounded-xl border-2 border-cream/30 p-3 text-cream transition-colors hover:border-gold hover:text-gold lg:hidden"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
+      {/* Mobile Navigation Drawer */}
       {open && (
-        <div className="animate-fade-in border-t border-cream/10 bg-navy/95 backdrop-blur-xl lg:hidden">
-          <nav aria-label="Navegação móvel" className="flex flex-col px-6 py-4">
+        <div className="animate-fade-in border-t border-cream/20 bg-navy/98 backdrop-blur-2xl lg:hidden shadow-2xl">
+          <nav aria-label="Navegação móvel" className="flex flex-col px-6 py-5 space-y-1">
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="border-b border-cream/8 py-3 text-sm tracking-wide text-cream/85 transition-colors hover:text-gold"
+                className="flex min-h-[52px] items-center border-b border-cream/15 text-lg font-medium text-cream hover:text-gold transition-colors"
               >
                 {link.label}
               </a>
             ))}
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3.5 text-sm font-medium text-cream"
-            >
-              <MessageCircle className="h-4 w-4" aria-hidden="true" />
-              Orçamento no WhatsApp
-            </a>
+
+            <div className="pt-4">
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="flex min-h-[52px] w-full items-center justify-center gap-3 rounded-xl bg-whatsapp px-6 py-4 text-base font-bold text-cream shadow-xl"
+              >
+                <MessageCircle className="h-6 w-6" aria-hidden="true" />
+                Orçamento no WhatsApp
+              </a>
+            </div>
           </nav>
         </div>
       )}

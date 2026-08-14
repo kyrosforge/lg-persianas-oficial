@@ -7,9 +7,10 @@ export const NAV_LINKS: ReadonlyArray<{ href: string; label: string }> = [
   { href: "#quem-somos", label: "Quem Somos" },
   { href: "#produtos", label: "Produtos" },
   { href: "#servicos", label: "Serviços" },
+  { href: "#como-funciona", label: "Como Funciona" },
   { href: "#portfolio", label: "Portfólio" },
   { href: "#depoimentos", label: "Depoimentos" },
-  { href: "#onde-estamos", label: "Onde estamos" },
+  { href: "#onde-estamos", label: "Onde Estamos" },
   { href: "#contato", label: "Contato" },
 ];
 

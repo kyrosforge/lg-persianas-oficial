@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sparkles, Eye, MessageCircle, ArrowRight, ShieldCheck, Ruler, Wrench } from "lucide-react";
+import { Sparkles, Eye, MessageCircle, Ruler, ShieldCheck, Wrench, ChevronDown, ChevronUp } from "lucide-react";
 import roloImg from "@/assets/products/rolo.png";
 import doubleVisionImg from "@/assets/products/double-vision.png";
 import painelJaponesImg from "@/assets/products/painel-japones.png";
@@ -21,6 +21,7 @@ export interface ProductItem {
   image: string;
   idealFor: string[];
   features: string[];
+  isPrimary?: boolean;
 }
 
 export const PRODUCTS: ProductItem[] = [
@@ -34,6 +35,7 @@ export const PRODUCTS: ProductItem[] = [
     image: roloImg,
     idealFor: ["Sala de Estar", "Quarto", "Escritório", "Varanda"],
     features: ["Acionamento suave", "Fácil higienização", "Diversidade de tecidos e tramas"],
+    isPrimary: true,
   },
   {
     id: "double-vision",
@@ -45,6 +47,7 @@ export const PRODUCTS: ProductItem[] = [
     image: doubleVisionImg,
     idealFor: ["Sala", "Home Office", "Sacada", "Suíte"],
     features: ["Efeito estético contemporâneo", "Controle de visibilidade em 2 níveis", "Proteção UV"],
+    isPrimary: true,
   },
   {
     id: "painel-japones",
@@ -56,6 +59,7 @@ export const PRODUCTS: ProductItem[] = [
     image: painelJaponesImg,
     idealFor: ["Grandes vãos", "Salas amplas", "Portas de correr", "Escritórios"],
     features: ["Recolhimento lateral suave", "Excelente caimento", "Modular e elegante"],
+    isPrimary: true,
   },
   {
     id: "screen-solar",
@@ -67,6 +71,7 @@ export const PRODUCTS: ProductItem[] = [
     image: screenSolarImg,
     idealFor: ["Varandas Gourmet", "Ambientes ensolarados", "Escritórios", "Salas com TV"],
     features: ["Redução da carga térmica", "Proteção de móveis e pisos", "Retenção UV extrema"],
+    isPrimary: true,
   },
   {
     id: "blackout",
@@ -78,6 +83,7 @@ export const PRODUCTS: ProductItem[] = [
     image: blackoutImg,
     idealFor: ["Quartos de casal", "Quartos infantis", "Home Theater", "Salas de Reunião"],
     features: ["Bloqueio 100% de luminosidade", "Isolamento térmico extra", "Conforto para o sono"],
+    isPrimary: true,
   },
   {
     id: "romana",
@@ -89,6 +95,7 @@ export const PRODUCTS: ProductItem[] = [
     image: romanaImg,
     idealFor: ["Sala de Jantar", "Quarto", "Cozinha gourmet", "Salas de estar"],
     features: ["Gomos dobráveis simétricos", "Ampla variedade de tecidos nobres", "Acabamento artesanal"],
+    isPrimary: true,
   },
   {
     id: "plissada",
@@ -100,6 +107,7 @@ export const PRODUCTS: ProductItem[] = [
     image: plissadaImg,
     idealFor: ["Janelas pequenas", "Clarabóias", "Tetos de vidro", "Banheiros"],
     features: ["Mínimo espaço de recolhimento", "Instalação em vãos estruturados", "Leve e delicada"],
+    isPrimary: false,
   },
   {
     id: "vertical",
@@ -111,6 +119,7 @@ export const PRODUCTS: ProductItem[] = [
     image: verticalImg,
     idealFor: ["Escritórios", "Ambientes corporativos", "Salas de conferência"],
     features: ["Giro de 180 graus", "Diversidade de cores e texturas", "Manutenção simplificada"],
+    isPrimary: false,
   },
   {
     id: "horizontal",
@@ -122,6 +131,7 @@ export const PRODUCTS: ProductItem[] = [
     image: horizontalImg,
     idealFor: ["Escritórios", "Cozinhas", "Consultórios", "Salas executivas"],
     features: ["Lâminas basculantes", "Opção em madeira ecológica", "Resistente e durável"],
+    isPrimary: false,
   },
   {
     id: "motorizada",
@@ -133,6 +143,7 @@ export const PRODUCTS: ProductItem[] = [
     image: motorizadaImg,
     idealFor: ["Smart Homes", "Janelas altas e vãos duplos", "Penthouses", "Corporativo"],
     features: ["Motor ultra silencioso", "Agendamento por horários", "Integração via Wi-Fi/Zigbee"],
+    isPrimary: false,
   },
 ];
 
@@ -150,43 +161,52 @@ interface ProductsSectionProps {
 
 export function ProductsSection({ onSelectProduct }: ProductsSectionProps) {
   const [activeCategory, setActiveCategory] = useState("all");
+  const [showAllModels, setShowAllModels] = useState(false);
 
-  const filteredProducts =
+  const categoryProducts =
     activeCategory === "all"
       ? PRODUCTS
       : PRODUCTS.filter((p) => p.category === activeCategory);
 
+  const displayedProducts =
+    showAllModels || activeCategory !== "all"
+      ? categoryProducts
+      : categoryProducts.filter((p) => p.isPrimary);
+
   return (
-    <section id="produtos" className="relative bg-navy py-20 lg:py-28 text-cream overflow-hidden">
-      {/* Glow overlays */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none" />
+    <section id="produtos" className="relative bg-navy py-16 lg:py-24 text-cream overflow-hidden">
+      {/* Background accents with floating animation */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl pointer-events-none animate-float-subtle" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-whatsapp/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative mx-auto max-w-[1400px] px-5 sm:px-8 lg:px-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl space-y-4">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.25em] text-gold uppercase bg-gold/10 px-3.5 py-1.5 rounded-full border border-gold/20">
-            <Sparkles className="w-3.5 h-3.5" /> NOSSOS PRODUTOS
+        <div className="max-w-3xl space-y-4 animate-fade-up">
+          <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-[0.2em] text-gold uppercase bg-gold/15 px-4 py-1.5 rounded-full border border-gold/30 shadow-sm">
+            <Sparkles className="w-4 h-4 text-gold animate-pulse" /> NOSSOS PRODUTOS SOB MEDIDA
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.12] text-cream">
-            Persianas sob medida para cada <span className="text-gold italic">estilo de vida.</span>
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.14] text-cream">
+            Persianas e cortinas para cada <span className="text-gold italic font-serif">estilo de ambiente.</span>
           </h2>
-          <p className="text-base sm:text-lg font-light text-cream/80 leading-relaxed">
-            Soluções que unem beleza, funcionalidade e tecnologia para transformar ambientes com conforto térmico, controle de luminosidade e sofisticação em Brasília.
+          <p className="text-base sm:text-lg font-normal text-cream/90 leading-relaxed">
+            Soluções completas com controle térmico, proteção solar e design contemporâneo. Orçamento e medição gratuita em Brasília/DF.
           </p>
         </div>
 
         {/* Filter Tabs */}
-        <div className="mt-10 flex flex-wrap gap-2 sm:gap-3 border-b border-cream/10 pb-5">
+        <div className="mt-8 flex flex-wrap gap-2.5 border-b border-cream/15 pb-4">
           {CATEGORIES.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => setActiveCategory(cat.id)}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 ${
+              onClick={() => {
+                setActiveCategory(cat.id);
+                if (cat.id !== "all") setShowAllModels(true);
+              }}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 ${
                 activeCategory === cat.id
-                  ? "bg-gold text-navy font-semibold shadow-lg shadow-gold/20 scale-105"
-                  : "bg-navy/60 text-cream/70 border border-cream/15 hover:border-gold/50 hover:text-cream"
+                  ? "bg-gold text-navy font-bold shadow-lg shadow-gold/25 scale-105"
+                  : "bg-navy/80 text-cream/80 border border-cream/20 hover:border-gold/60 hover:text-cream hover:scale-102"
               }`}
             >
               {cat.label}
@@ -194,49 +214,48 @@ export function ProductsSection({ onSelectProduct }: ProductsSectionProps) {
           ))}
         </div>
 
-        {/* Product Cards Grid */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
-          {filteredProducts.map((product) => (
+        {/* Product Cards Grid with Scale & Hover Motion */}
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {displayedProducts.map((product) => (
             <div
               key={product.id}
-              className="group relative rounded-2xl bg-navy/90 border border-cream/15 overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-2 hover:border-gold/60 hover:shadow-2xl hover:shadow-gold/10"
+              className="group relative rounded-2xl bg-navy/95 border border-cream/20 overflow-hidden flex flex-col justify-between transition-all duration-500 hover:-translate-y-2.5 hover:border-gold/70 hover:shadow-[0_20px_40px_-15px_rgba(234,179,8,0.25)] animate-scale-in"
             >
-              {/* Product Image */}
-              <div className="relative h-56 w-full overflow-hidden bg-slate-900">
+              {/* Image & Badge */}
+              <div className="relative h-60 w-full overflow-hidden bg-slate-900">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-108"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent opacity-80" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/30 to-transparent" />
                 
-                {/* Category badge */}
                 <div className="absolute top-3 left-3">
-                  <span className="text-[10px] font-semibold tracking-wider text-gold uppercase bg-navy/80 backdrop-blur-md px-2.5 py-1 rounded-md border border-gold/30">
+                  <span className="text-xs font-semibold tracking-wider text-gold uppercase bg-navy/90 backdrop-blur-md px-3 py-1 rounded-md border border-gold/40 shadow-sm">
                     {product.tagline}
                   </span>
                 </div>
               </div>
 
-              {/* Card Body */}
+              {/* Body */}
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div className="space-y-2">
-                  <h3 className="font-serif text-xl font-semibold text-cream group-hover:text-gold transition-colors">
+                <div className="space-y-2.5">
+                  <h3 className="font-serif text-2xl font-bold text-cream group-hover:text-gold transition-colors duration-300">
                     {product.name}
                   </h3>
-                  <p className="text-xs font-light text-cream/75 leading-relaxed line-clamp-3">
+                  <p className="text-sm font-normal text-cream/90 leading-relaxed">
                     {product.description}
                   </p>
                 </div>
 
-                {/* Ideal For Badges */}
-                <div className="space-y-2 pt-2">
-                  <p className="text-[11px] font-semibold uppercase tracking-wider text-gold/80">Ideal para:</p>
+                {/* Ideal for Badges */}
+                <div className="space-y-2 pt-2 border-t border-cream/10">
+                  <p className="text-xs font-bold uppercase tracking-wider text-gold">Ideal para:</p>
                   <div className="flex flex-wrap gap-1.5">
                     {product.idealFor.map((item) => (
                       <span
                         key={item}
-                        className="text-[11px] font-light bg-cream/10 text-cream/90 px-2 py-0.5 rounded-md border border-cream/10"
+                        className="text-xs font-medium bg-cream/15 text-cream px-2.5 py-1 rounded-md border border-cream/15 transition-transform hover:scale-105"
                       >
                         {item}
                       </span>
@@ -244,14 +263,14 @@ export function ProductsSection({ onSelectProduct }: ProductsSectionProps) {
                   </div>
                 </div>
 
-                {/* CTA Buttons */}
-                <div className="pt-4 border-t border-cream/10 flex items-center gap-2">
+                {/* Clear CTAs */}
+                <div className="pt-4 border-t border-cream/15 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
                   <button
                     type="button"
                     onClick={() => onSelectProduct?.(product)}
-                    className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg border border-gold/40 px-3 py-2.5 text-xs font-medium text-cream hover:bg-gold hover:text-navy transition-all duration-300"
+                    className="flex-1 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl border-2 border-gold/60 bg-navy/60 px-4 py-2.5 text-sm font-semibold text-cream hover:bg-gold hover:text-navy transition-all duration-300 hover:scale-[1.02]"
                   >
-                    <Eye className="w-3.5 h-3.5" /> Ver Detalhes
+                    <Eye className="w-4 h-4" /> Detalhes
                   </button>
                   <a
                     href={`${WHATSAPP_URL}&text=${encodeURIComponent(
@@ -259,10 +278,9 @@ export function ProductsSection({ onSelectProduct }: ProductsSectionProps) {
                     )}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center p-2.5 rounded-lg bg-whatsapp text-cream hover:scale-105 transition-transform"
-                    title={`Orçar ${product.name} no WhatsApp`}
+                    className="flex-1 inline-flex min-h-[44px] items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-2.5 text-sm font-semibold text-cream shadow-md hover:scale-[1.03] transition-transform duration-300"
                   >
-                    <MessageCircle className="w-4 h-4" />
+                    <MessageCircle className="w-4 h-4" /> Orçar no WhatsApp
                   </a>
                 </div>
               </div>
@@ -270,41 +288,55 @@ export function ProductsSection({ onSelectProduct }: ProductsSectionProps) {
           ))}
         </div>
 
-        {/* Bottom Feature Badges Bar */}
-        <div className="mt-16 rounded-2xl bg-navy/80 border border-gold/30 p-6 sm:p-8 backdrop-blur-md">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-cream/10">
-            <div className="flex items-start gap-4 pt-4 md:pt-0 md:pr-4">
-              <div className="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center text-gold shrink-0 border border-gold/30">
-                <Ruler className="w-6 h-6" />
+        {/* Expand / Collapse Button */}
+        {activeCategory === "all" && (
+          <div className="mt-10 text-center">
+            <button
+              type="button"
+              onClick={() => setShowAllModels((prev) => !prev)}
+              className="inline-flex min-h-[50px] items-center justify-center gap-3 rounded-full bg-navy/90 border-2 border-gold px-8 py-3.5 text-base font-bold text-cream hover:bg-gold hover:text-navy shadow-xl transition-all duration-300 hover:scale-105"
+            >
+              <span>{showAllModels ? "Mostrar menos modelos" : "Ver todos os modelos de persianas"}</span>
+              {showAllModels ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5 text-gold group-hover:text-navy" />}
+            </button>
+          </div>
+        )}
+
+        {/* Bottom Feature Badges */}
+        <div className="mt-14 rounded-2xl bg-navy/90 border border-gold/40 p-6 sm:p-8 backdrop-blur-md shadow-xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 divide-y md:divide-y-0 md:divide-x divide-cream/15">
+            <div className="flex items-start gap-4 pt-4 md:pt-0 md:pr-4 group">
+              <div className="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-gold shrink-0 border border-gold/40 group-hover:bg-gold group-hover:text-navy transition-colors duration-300">
+                <Ruler className="w-6 h-6 group-hover:scale-110 transition-transform" />
               </div>
               <div>
-                <h4 className="font-serif text-lg font-semibold text-cream">Soluções sob medida</h4>
-                <p className="text-xs font-light text-cream/70 mt-1 leading-relaxed">
-                  Cada peça é produzida na medida exata da sua janela, sem folgas ou adaptações.
+                <h4 className="font-serif text-lg font-bold text-cream group-hover:text-gold transition-colors">Medição Gratuita no Local</h4>
+                <p className="text-xs sm:text-sm font-normal text-cream/90 mt-1 leading-relaxed">
+                  Técnicos levam o catálogo de tecidos e medem cada janela sem compromisso em todo o DF.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 pt-6 md:pt-0 md:px-6">
-              <div className="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center text-gold shrink-0 border border-gold/30">
-                <ShieldCheck className="w-6 h-6" />
+            <div className="flex items-start gap-4 pt-6 md:pt-0 md:px-6 group">
+              <div className="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-gold shrink-0 border border-gold/40 group-hover:bg-gold group-hover:text-navy transition-colors duration-300">
+                <ShieldCheck className="w-6 h-6 group-hover:scale-110 transition-transform" />
               </div>
               <div>
-                <h4 className="font-serif text-lg font-semibold text-cream">Materiais premium</h4>
-                <p className="text-xs font-light text-cream/70 mt-1 leading-relaxed">
-                  Tecidos, lâminas e mecanismos selecionados de alta resistência para durar muitos anos.
+                <h4 className="font-serif text-lg font-bold text-cream group-hover:text-gold transition-colors">Garantia de até 2 Anos</h4>
+                <p className="text-xs sm:text-sm font-normal text-cream/90 mt-1 leading-relaxed">
+                  Cobertura completa para mecanismos, tecidos e instalação com suporte rápido pós-venda.
                 </p>
               </div>
             </div>
 
-            <div className="flex items-start gap-4 pt-6 md:pt-0 md:pl-6">
-              <div className="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center text-gold shrink-0 border border-gold/30">
-                <Wrench className="w-6 h-6" />
+            <div className="flex items-start gap-4 pt-6 md:pt-0 md:pl-6 group">
+              <div className="w-12 h-12 rounded-xl bg-gold/20 flex items-center justify-center text-gold shrink-0 border border-gold/40 group-hover:bg-gold group-hover:text-navy transition-colors duration-300">
+                <Wrench className="w-6 h-6 group-hover:scale-110 transition-transform" />
               </div>
               <div>
-                <h4 className="font-serif text-lg font-semibold text-cream">Atendimento especializado</h4>
-                <p className="text-xs font-light text-cream/70 mt-1 leading-relaxed">
-                  Do projeto à instalação, você conta com o suporte e consultoria dedicada da nossa equipe.
+                <h4 className="font-serif text-lg font-bold text-cream group-hover:text-gold transition-colors">Instalação com Equipe Própria</h4>
+                <p className="text-xs sm:text-sm font-normal text-cream/90 mt-1 leading-relaxed">
+                  Profissionais próprios com mais de 22 anos de experiência e acabamento limpo e perfeito.
                 </p>
               </div>
             </div>
