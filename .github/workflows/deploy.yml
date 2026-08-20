@@ -25,6 +25,42 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Prepare dist folder
+        run: |
+          mkdir -p dist
+          if [ -d ".vercel/output/static" ]; then
+            cp -r .vercel/output/static/* dist/
+          elif [ -d ".output/public" ]; then
+            cp -r .output/public/* dist/
+          fi
+          
+          if [ ! -f "dist/index.html" ]; then
+            CSS_FILE=$(find dist/assets -name "styles-*.css" | head -n 1 | sed 's|dist/|/|')
+            JS_FILE=$(find dist/assets -name "index-*.js" | head -n 1 | sed 's|dist/|/|')
+            cat > dist/index.html << EOF
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+            <head>
+              <meta charset="UTF-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>LG Persianas | Persianas Sob Medida em Brasília e DF</title>
+              <meta name="description" content="Persianas de luxo sob medida em Brasília e DF. Rolô, Double Vision, Blackout, Romana, Plissada e Motorização Smart. Atendimento VIP e garantia de fábrica." />
+              <link rel="preconnect" href="https://fonts.googleapis.com" />
+              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+              <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" />
+              <link rel="icon" href="/favicon.png" type="image/png" />
+              <link rel="shortcut icon" href="/favicon.ico" />
+              <link rel="apple-touch-icon" href="/favicon.png" />
+              <link rel="stylesheet" href="\${CSS_FILE}" />
+            </head>
+            <body>
+              <div id="root"></div>
+              <script type="module" src="\${JS_FILE}"></script>
+            </body>
+          </html>
+          EOF
+          fi
+
       - name: Create SPA .htaccess
         run: |
           cat > dist/.htaccess << 'EOF'
