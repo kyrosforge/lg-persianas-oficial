@@ -32,3 +32,6 @@ dist-ssr
 *.sw?
 
 .vercel
+.output.zip
+.netlify/state.json
+
